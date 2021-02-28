@@ -16,9 +16,21 @@ public class Userservice {
     public void register(){
         User user = new User();
         user.setUsername("xiaoxiao");
-        user.setPassword("jiangzhiwei");
+        user.setUsername("jiangzhiwei");
         user.setEmail("jiang@qq.com");
         userService.register(user);
     }
+
+
+    @Test
+    public void findUser(){
+        User user = new User();
+        user.setPassword("123456");
+        user.setUsername("admin");
+        User byUser = userService.findByUser(user);
+        System.out.println(byUser);
+
+    }
+
 
 }

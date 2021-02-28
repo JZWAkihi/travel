@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.jiang.travels.dao.ProvinceDAO">
+
+    <!--  分页查询所有  -->
+    <select id="findByPage" resultType="com.jiang.travels.entity.Province">
+        Select id,name,tags,placecounts
+        from t_province
+        order by placecounts
+        limit #{start},#{rows}
+    </select>
+
+    <select id="findTotals" resultType="Integer">
+        Select count(id) from t_province
+    </select>
+
+
+</mapper>

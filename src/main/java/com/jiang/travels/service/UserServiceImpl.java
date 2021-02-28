@@ -2,9 +2,12 @@ package com.jiang.travels.service;
 
 import com.jiang.travels.dao.UserDao;
 import com.jiang.travels.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -20,7 +23,22 @@ public class UserServiceImpl implements UserService {
         }else{
             throw new RuntimeException("用户名存在");
         }
+    }
 
 
+    @Override
+    public User findByUser(User user) {
+        User UserDB = userDao.findByUserName(user.getUsername());
+        log.info(user.toString());
+        log.info(UserDB + " ");
+        if(UserDB!=null){
+            if (UserDB.getPassword().equals(user.getPassword())){
+                return UserDB;
+            }else{
+                throw new RuntimeException("密码错误");
+            }
+        }else{
+            throw new RuntimeException("用户名错误");
+        }
     }
 }

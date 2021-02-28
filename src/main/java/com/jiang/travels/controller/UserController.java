@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.SimpleFormatter;
 
-@Controller
+@RestController
 @RequestMapping("user")
 @CrossOrigin   //允许跨域
 @Slf4j // 日志对象
@@ -34,6 +34,34 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+
+    @RequestMapping(value = "/login")
+    public Result login(@RequestBody User user,HttpServletRequest request){
+        Result result = new Result();
+
+        log.info(user.toString());
+
+        try {
+            User UserDB = userService.findByUser(user);
+            //登录成功后保存用户的标签
+            //ServletContext  application
+            request.getServletContext().setAttribute(UserDB.getId(),UserDB);
+
+            result.setMsg("登录成功").setUserId(UserDB.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setState(false).setMsg(e.getMessage());
+
+            log.info(result.toString());
+        }
+        return result;
+    }
+
+
+
+
+
     /**
      * 用户注册
      * @param code
@@ -41,7 +69,6 @@ public class UserController {
      * @return
      */
     @PostMapping("/register")
-    @ResponseBody
     public Result register(String code, String key, @RequestBody User user, HttpServletRequest request) { // axios发送的是JSON数据, 需要加@RequestBody来接收
         Result result = new Result();
         log.info("接收的验证码：" + code);

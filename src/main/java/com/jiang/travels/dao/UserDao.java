@@ -9,10 +9,8 @@ import org.springframework.stereotype.Component;
 public interface UserDao {
 
     //根据用户查询用户
-    User findByUserName(String name);
+    User findByUserName(String username);
 
     //注册用户
     void save(User user);
-
-
 }
