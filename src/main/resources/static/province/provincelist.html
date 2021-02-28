@@ -67,7 +67,7 @@
                     <td v-text="province.id"></td>
                     <td v-text="province.name"></td>
                     <td v-text="province.tags"></td>
-                    <td v-text="province.placeCounts"></td>
+                    <td v-text="province.placecounts"></td>
                     <td>
                         <a href="javascript:;" @click="deleteProvince(province.id)">删除省份</a>
                         <a :href="'../viewspot/viewspotlist.html?id=' + province.id">景点列表</a>
@@ -103,34 +103,34 @@
         el: "#app",
         data: {
             provinces: [],
-            page: 0,
-            rows: 4,
+            page: 1,
+            rows: 5,
             totalPage: 0,
             totals: 0,
             time: "",
         },
         methods: {
             findAll(indexpage) { // 查询某一页的数据
+                if (indexpage) {
+                    this.page = indexpage;
+                }
                 _this = this; // 保存当前对象, 用于下面的作用域
                 axios.get("http://localhost:8080/province/findByPage?page=" + this.page + "&rows=" + this.rows).then((res) => {
-                    console.log(res.data)
                     _this.provinces = res.data.provinces;
                     _this.page = res.data.page;
                     _this.totalPage = res.data.totalPage;
                     _this.totals = res.data.totals;
                 });
             },
-            deleteProvince(id) {
-                if (confirm("确定要删除省份信息吗?")) {
-                    axios.get("http://localhost:8989/province/delete?id=" + id).then((res) => {
-                        if (res.data.state) {
-                            alert(res.data.msg + "点击确定跳转到省份列表页面!");
-                            location.reload(true); // 刷新当前页面
-                        } else {
-                            alert(res.data.msg);
-                        }
-                    });
-                }
+            deleteProvince(id){
+                axios.post("http://localhost:8080/province/delete?id=" + id).then((res)=>{
+                    if(res.data.state){
+                        alert(res.data.msg + ",请点击确定，跳转到查询全部省份");
+                        location.reload(true); //刷新当前页面
+                    }else{
+                        alert(res.data.msg)
+                    }
+                })
             }
         },
         created() {

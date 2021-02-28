@@ -16,11 +16,36 @@ public class ProvinceServiceImpl implements ProinceService {
 
     @Override
     public List<Province> findByPage(Integer Page, Integer rows) {
-        return proinceDAO.findByPage(Page,rows);
+
+        int start = Page - 1;
+        return proinceDAO.findByPage(start*rows,rows);
+    }
+
+    @Override
+    public void save(Province province) {
+        proinceDAO.save(province);
+    }
+
+    @Override
+    public Province findOne(String id) {
+        return proinceDAO.findOne(id);
+    }
+
+    @Override
+    public void updata(Province province) {
+        proinceDAO.update(province);
+    }
+
+    @Override
+    public void delete(String id) {
+        proinceDAO.delete(id);
     }
 
     @Override
     public Integer findTotal() {
         return proinceDAO.findTotals();
+
+
+
     }
 }

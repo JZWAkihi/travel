@@ -75,7 +75,7 @@
         },
         methods: {
             saveProvinceInfo() {
-                axios.post("http://localhost:8989/province/save", this.province).then((res) => {
+                axios.post("http://localhost:8080/province/save", this.province).then((res) => {
                     if (res.data.state) {
                         alert(res.data.msg + "点击确定跳转到省份列表页面!");
                         location.href = './provincelist.html';

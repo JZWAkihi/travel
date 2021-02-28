@@ -16,4 +16,24 @@
     </select>
 
 
+    <insert id="save" parameterType="com.jiang.travels.entity.Province" useGeneratedKeys="true" keyProperty="id">
+        insert into t_province values (#{id},#{name},#{tags},#{placecounts})
+    </insert>
+
+    <delete id="delete" parameterType="String">
+        delete from t_province where id = #{id}
+    </delete>
+
+
+    <select id="findOne" resultType="com.jiang.travels.entity.Province">
+        select id,name,tags,placecounts
+        from t_province
+        where id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.jiang.travels.entity.Province">
+        update t_province set name=#{name},tags=#{tags},placecounts=#{placecounts}
+        where id=#{id}
+    </update>
+
 </mapper>

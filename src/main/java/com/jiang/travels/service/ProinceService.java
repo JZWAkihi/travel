@@ -12,4 +12,16 @@ public interface ProinceService {
     //查询总页数
     Integer findTotal();
 
+    //添加省份
+    void save(Province province);
+
+    //删除省份
+    void delete(String id);
+
+    //查找一个
+    Province findOne(String id);
+
+    //修改省份信息
+    void updata(Province province);
+
 }

@@ -13,6 +13,7 @@ public interface BaseDAO<T,K> {
 
     List<T> findAll();
 
+    T findOne(K k);
 
     List<T> findByPage(@Param("start") Integer start,@Param("rows") Integer rows);
 
