@@ -138,7 +138,7 @@
                 // axios
                 axios({
                     method: 'post',
-                    url: 'http://localhost:8989/place/update',
+                    url: 'http://localhost:8080/place/update',
                     data: formData,
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -155,7 +155,7 @@
             },
             findOnePlace() {
                 _this = this;
-                axios.get("http://localhost:8989/place/findOne?id=" + this.id).then((res) => {
+                axios.get("http://localhost:8080/place/findOne?id=" + this.id).then((res) => {
                     _this.place = res.data;
                     _this.src = "data:image/png;base64," + _this.place.picpath;
                     // console.log(_this.place);
@@ -163,7 +163,7 @@
             },
             findAllProvinces() {
                 _this = this;
-                axios.get("http://localhost:8989/province/findByPage?rows=35").then((res) => {
+                axios.get("http://localhost:8080/province/findByPage?rows=35").then((res) => {
                     // console.log(res.data.provinces);
                     _this.provinces = res.data.provinces;
                 });

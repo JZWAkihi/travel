@@ -1,0 +1,51 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.jiang.travels.dao.PlaceDAO">
+
+    <!--根据省份id查询所有景点信息并排序-->
+    <select id="findByProvinceIdPage" resultType="com.jiang.travels.entity.Place">
+        select id,name,picpath,hottime,hotticket,dimticket,placedes,provinceid
+        from t_place
+        where provinceid = #{provinceId}
+        order by hotticket
+        limit #{start},#{rows}
+    </select>
+
+    <!--根据省份id查询当前省份所有景点个数-->
+    <select id="findByProvinceIdCounts" resultType="Integer">
+        select count(id)
+        from t_place
+        where provinceId = #{provinceId}
+    </select>
+
+
+    <insert id="save" parameterType="com.jiang.travels.entity.Place" keyProperty="id" useGeneratedKeys="true">
+        insert into t_place values(#{id},#{name},#{picpath},#{hottime},#{hotticket},#{dimticket},#{placedes},#{provinceid})
+    </insert>
+
+
+    <delete id="delete" parameterType="String">
+        delete from t_place where id = ${id}
+    </delete>
+
+    <select id="findOne" parameterType="String" resultType="com.jiang.travels.entity.Place">
+        select id,name,picpath,hottime,hotticket,dimticket,placedes,provinceid
+        from t_place
+        where id=#{id}
+    </select>
+
+
+    <update id="update" parameterType="com.jiang.travels.entity.Place">
+        update t_place set
+        name=#{name},
+        picpath=#{picpath},
+        hottime=#{hottime},
+        hotticket=#{hotticket},
+        dimticket=#{dimticket},
+        placedes=#{placedes},
+        provinceid=#{provinceid}
+        where id = #{id}
+    </update>
+
+</mapper>

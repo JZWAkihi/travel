@@ -4,6 +4,12 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
+/***
+ *
+ * @param <T>  实体类
+ * @param <K>  主键类型
+ */
 public interface BaseDAO<T,K> {
     void save(T t);
 

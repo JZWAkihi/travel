@@ -150,7 +150,7 @@
                 //axios
                 axios({
                     method: 'post',
-                    url: 'http://localhost:8989/place/save',
+                    url: 'http://localhost:8080/place/save',
                     data: formData,
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -167,7 +167,8 @@
             },
             findAllProvinces() {
                 _this = this;
-                axios.get("http://localhost:8989/province/findByPage?rows=35").then((res) => {
+                //通过分页来查询省份信息
+                axios.get("http://localhost:8080/province/findByPage?rows=35").then((res) => {
                     console.log(res.data.provinces);
                     _this.provinces = res.data.provinces;
                 });

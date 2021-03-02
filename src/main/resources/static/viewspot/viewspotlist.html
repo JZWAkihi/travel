@@ -130,20 +130,25 @@
         },
         methods: {
             findAllPage(index) {
+                console.log(index);
                 _this = this;
                 if (index) {
                     this.page = index;
                 }
-                axios.get("http://localhost:8989/place/findAllPlace?provinceId=" + this.id).then((res) => {
+                console.log(this.page);
+                axios.get("http://localhost:8080/place/findAllPlace?provinceId=" + this.id + "&page=" + this.page).then((res) => {
+                    console.log(res.data);
                     _this.places = res.data.places;
                     _this.totalPage = res.data.totalPage;
                     _this.page = res.data.page;
+                    console.log(_this);
+
                 });
             },
             deletePlace(id) {
                 console.log(id);
                 if (confirm("确定要删除景点信息吗?")) {
-                    axios.get("http://localhost:8989/place/delete?id=" + id).then((res) => {
+                    axios.get("http://localhost:8080/place/delete?id=" + id).then((res) => {
                         if (res.data.state) {
                             alert(res.data.msg + ", 点击确定刷新数据!!!");
                             location.reload(); // 刷新页面
@@ -157,7 +162,6 @@
         created() {
             let id = location.href.substring(location.href.indexOf("=") + 1);
             this.id = id;
-            console.log(this.id);
             this.findAllPage(id);
 
             let now = new Date();
