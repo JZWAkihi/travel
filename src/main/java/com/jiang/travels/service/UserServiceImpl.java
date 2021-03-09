@@ -14,7 +14,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-
+    /***
+     * 用户注册
+     * @param user
+     */
     @Override
     public void register(User user) {
 
@@ -26,6 +29,12 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    /**
+     *
+     * 用户登录
+     * @param user
+     * @return
+     */
     @Override
     public User findByUser(User user) {
         User UserDB = userDao.findByUserName(user.getUsername());

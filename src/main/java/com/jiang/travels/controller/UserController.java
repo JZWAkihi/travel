@@ -24,6 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * RestController   返回JSON
+ */
 @RestController
 @RequestMapping("user")
 @CrossOrigin   //允许跨域
@@ -35,11 +38,17 @@ public class UserController {
     private UserService userService;
 
 
-
+    /***
+     *
+     * 登录，并且保存UserDB和UserID
+     *
+     * @param user
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/login")
     public Result login(@RequestBody User user,HttpServletRequest request){
         Result result = new Result();
-
         log.info(user.toString());
 
         try {
@@ -77,6 +86,7 @@ public class UserController {
 
         log.info("keyCode" + keyCode);
         try {
+            //判断验证码是否相同
             if (code.equalsIgnoreCase(keyCode)) {
                 userService.register(user);
                 result.setMsg("注册成功");
@@ -90,6 +100,14 @@ public class UserController {
         return result;
     }
 
+    /**
+     *
+     * 生成验证码
+     *
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @GetMapping("getImage")
     @ResponseBody
     public Map<String, String> getImage(HttpServletRequest request) throws IOException {
@@ -98,7 +116,9 @@ public class UserController {
         // 获取验证码
         String securityCode = createImageCode.getCode();
         // 验证码存入session
+        //key  获得时间戳
         String key = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        log.info(key);
         request.getServletContext().setAttribute(key, securityCode);
         log.info("------------------------" + securityCode);
         // 生成图片

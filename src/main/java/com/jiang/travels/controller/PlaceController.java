@@ -8,14 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.beans.IntrospectionException;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,7 +34,7 @@ public class PlaceController {
 
 
     @PostMapping("update")
-    public Result update(MultipartFile pic,Place place) throws IOException {
+    public Result update(MultipartFile pic,Place place){
         Result result = new Result();
         try {
             //对接受的文件做base64
@@ -87,7 +84,7 @@ public class PlaceController {
     
 
     @PostMapping("save")
-    public Result save(MultipartFile pic, Place place) throws IOException {
+    public Result save(MultipartFile pic, Place place){
         Result result = new Result();
         try {
             // 文件上传
