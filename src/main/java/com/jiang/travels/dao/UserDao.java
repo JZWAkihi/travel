@@ -13,4 +13,7 @@ public interface UserDao {
 
     //注册用户
     void save(User user);
+
+    //修改
+    void updata(User user);
 }

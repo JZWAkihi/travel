@@ -4,6 +4,7 @@ import com.jiang.travels.TravelApplication;
 import com.jiang.travels.dao.UserDao;
 import com.jiang.travels.entity.User;
 import com.jiang.travels.service.UserService;
+import org.apache.ibatis.cache.Cache;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,16 +25,26 @@ public class Userservice {
 
     @Test
     public void findUser(){
-
-        Cache
-
         User user = new User();
         user.setPassword("123456");
         user.setUsername("admin");
-        User byUser = userService.findByUser(user);
-        System.out.println(byUser);
+        User byUser1 = userService.findByUser(user);
+        System.out.println(byUser1);
 
+        System.out.println("====================================");
+
+        user.setPassword("123456");
+        user.setUsername("admin");
+        User byUser2 = userService.findByUser(user);
+        System.out.println(byUser2);
     }
 
+    @Test
+    public void Updata(){
+        User user = new User();
+        user.setId("9");
+        user.setEmail("11111@qq.com");
+        userService.updata(user);
+    }
 
 }

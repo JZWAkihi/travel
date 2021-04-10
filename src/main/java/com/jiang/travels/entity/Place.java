@@ -9,6 +9,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -16,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-public class Place {
+public class Place implements Serializable {
     private String id;
     private String name;
     private String picpath;

@@ -7,6 +7,7 @@ public interface UserService {
 
     User findByUser(User user);
 
-
+    //修改
+    void updata(User user);
 }
 

@@ -6,12 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @CrossOrigin
 @ToString
-public class User {
+public class User implements Serializable {
 
     private String id;
     private String username;

@@ -50,4 +50,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("用户名错误");
         }
     }
+
+
+    //修改
+
+    @Override
+    public void updata(User user) {
+        userDao.updata(user);
+    }
 }

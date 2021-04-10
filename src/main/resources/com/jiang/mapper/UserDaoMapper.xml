@@ -4,7 +4,7 @@
 <mapper namespace="com.jiang.travels.dao.UserDao">
 
     <!--  开启mybatis的二级缓存 需要开启序列化  -->
-    <cache />
+    <cache type="com.jiang.travels.cache.RedisCache"/>
 
 
     <!--注册用户-->
@@ -17,5 +17,9 @@
         select * from t_user where username = #{name}
     </select>
 
+    <update id="updata" parameterType="com.jiang.travels.entity.User">
+        update t_user set email = #{email}
+        where id = #{id}
+    </update>
 
 </mapper>
