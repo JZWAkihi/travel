@@ -3,6 +3,9 @@
 
 <mapper namespace="com.jiang.travels.dao.UserDao">
 
+    <!--  开启mybatis的二级缓存 需要开启序列化  -->
+    <cache />
+
 
     <!--注册用户-->
     <insert id="save" parameterType="com.jiang.travels.entity.User" useGeneratedKeys="true" keyProperty="id">

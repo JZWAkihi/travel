@@ -24,6 +24,9 @@ public class Userservice {
 
     @Test
     public void findUser(){
+
+        Cache
+
         User user = new User();
         user.setPassword("123456");
         user.setUsername("admin");
